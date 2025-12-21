@@ -27,7 +27,7 @@ export function USMap({ servicedStates, comingSoonStates = [] }: USMapProps) {
           <span className="text-sm text-muted-foreground">Currently Serving</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded bg-amber-500" />
+          <div className="w-4 h-4 rounded bg-gray-500" />
           <span className="text-sm text-muted-foreground">Coming Soon</span>
         </div>
       </div>
@@ -46,10 +46,10 @@ export function USMap({ servicedStates, comingSoonStates = [] }: USMapProps) {
         </div>
         {comingSoonStates.length > 0 && (
           <div>
-            <h3 className="font-semibold text-lg mb-3 text-amber-600">Coming Soon</h3>
+            <h3 className="font-semibold text-lg mb-3">Coming Soon</h3>
             <div className="flex flex-wrap gap-2">
               {comingSoonStates.map((state) => (
-                <span key={state} className="px-3 py-1 bg-amber-500/10 text-amber-600 rounded-full text-sm">
+                <span key={state} className="px-3 py-1 bg-gray-500/10 rounded-full text-sm">
                   {state}
                 </span>
               ))}
