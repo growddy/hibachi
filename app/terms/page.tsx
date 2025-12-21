@@ -60,7 +60,7 @@ export default function TermsPage() {
                 <section>
                   <h2 className="font-serif text-2xl font-bold mb-4">6. Liability</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Let's Hibachi carries comprehensive liability insurance. However, the host assumes responsibility
+                    Dynamite Hibachi carries comprehensive liability insurance. However, the host assumes responsibility
                     for their guests' safety and behavior. We are not liable for injuries caused by guest misconduct or
                     pre-existing venue hazards.
                   </p>

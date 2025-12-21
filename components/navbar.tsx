@@ -25,7 +25,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Flame className="h-7 w-7 text-primary" />
-          <span className="font-serif text-xl font-bold tracking-tight">Let&apos;s Hibachi</span>
+          <span className="font-serif text-xl font-bold tracking-tight">Dynamite Hibachi</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -62,7 +62,7 @@ export function Navbar() {
           <SheetContent side="right" className="w-[300px]">
             <SheetTitle className="flex items-center gap-2 mb-8">
               <Flame className="h-6 w-6 text-primary" />
-              <span className="font-serif font-bold">Let&apos;s Hibachi</span>
+              <span className="font-serif font-bold">Dynamite Hibachi</span>
             </SheetTitle>
             <nav className="flex flex-col gap-4">
               {navLinks.map((link) => (

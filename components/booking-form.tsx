@@ -95,7 +95,7 @@ export function BookingForm() {
         <CheckCircle className="h-20 w-20 text-primary mx-auto mb-6" />
         <h2 className="font-serif text-3xl font-bold mb-4">Booking Request Received!</h2>
         <p className="text-muted-foreground max-w-md mx-auto mb-2">
-          Thank you for choosing Let's Hibachi! Our event coordinator will contact you within 24-48 hours to confirm
+          Thank you for choosing Dynamite Hibachi! Our event coordinator will contact you within 24-48 hours to confirm
           your reservation.
         </p>
         <p className="text-sm text-muted-foreground mb-8">Check your email for a confirmation with the details.</p>

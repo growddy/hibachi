@@ -9,12 +9,12 @@ const inter = Inter({ subsets: ["latin"] })
 const playfair = Playfair_Display({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Let's Hibachi | Private Event Catering",
+  title: "Dynamite Hibachi | Private Event Catering",
   description:
     "Premium hibachi private event catering at your home or venue. Professional chefs, unforgettable entertainment, customizable menus.",
   keywords: ["hibachi", "catering", "private chef", "event catering", "party", "birthday", "corporate event"],
   openGraph: {
-    title: "Let's Hibachi | Private Event Catering",
+    title: "Dynamite Hibachi | Private Event Catering",
     description: "Premium hibachi private event catering at your home or venue.",
     type: "website",
   },

@@ -19,7 +19,7 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
               <Flame className="h-7 w-7 text-primary" />
-              <span className="font-serif text-xl font-bold">Let&apos;s Hibachi</span>
+              <span className="font-serif text-xl font-bold">Dynamite Hibachi</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Premium hibachi catering for unforgettable private events. Bringing the excitement of teppanyaki to your
@@ -97,7 +97,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Let&apos;s Hibachi. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Dynamite Hibachi. All rights reserved.</p>
           <Link href="/terms" className="hover:text-primary transition-colors">
             Terms & Conditions
           </Link>

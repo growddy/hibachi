@@ -82,11 +82,11 @@ export const PRICING_CONFIG = {
 // Contact information
 export const CONTACT_INFO = {
   phone: "(555) 123-4567",
-  email: "info@letshibachi.com",
+  email: "info@dynamitehibachi.com",
   social: {
-    instagram: "https://instagram.com/letshibachi",
-    tiktok: "https://tiktok.com/@letshibachi",
-    facebook: "https://facebook.com/letshibachi",
+    instagram: "https://instagram.com/dynamitehibachi",
+    tiktok: "https://tiktok.com/@dynamitehibachi",
+    facebook: "https://facebook.com/dynamitehibachi",
   },
 }
 
@@ -103,7 +103,7 @@ export const REVIEWS = [
     id: 2,
     name: "Michael T.",
     rating: 5,
-    text: "We hired Let's Hibachi for our corporate event and everyone was blown away. Professional, delicious, and so much fun!",
+    text: "We hired Dynamite Hibachi for our corporate event and everyone was blown away. Professional, delicious, and so much fun!",
     eventType: "Corporate Event",
   },
   {
@@ -124,7 +124,7 @@ export const REVIEWS = [
     id: 5,
     name: "Amanda K.",
     rating: 5,
-    text: "We've used Let's Hibachi three times now. Consistently excellent food and service every single time.",
+    text: "We've used Dynamite Hibachi three times now. Consistently excellent food and service every single time.",
     eventType: "Family Gathering",
   },
   {

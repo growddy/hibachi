@@ -3,7 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Updated theme for Let's Hibachi - warm, premium, event-focused palette */
+/* Updated theme for Dynamite Hibachi - warm, premium, event-focused palette */
 :root {
   --background: oklch(0.99 0.002 90);
   --foreground: oklch(0.15 0.02 30);
