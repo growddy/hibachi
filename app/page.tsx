@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { ReviewCard } from "@/components/review-card"
+import { VideoBackground } from "@/components/video-background"
 import { REVIEWS, CONTACT_INFO } from "@/lib/config"
 
 const features = [
@@ -54,16 +55,26 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-secondary/30 py-20 md:py-32">
-          <div className="container mx-auto px-4">
+        <section className="relative overflow-hidden min-h-[600px] py-20 md:py-32">
+          {/* Video Background */}
+          <VideoBackground />
+          
+          {/* Content */}
+          <div className="relative z-10 container mx-auto px-4">
             <div className="mx-auto max-w-3xl text-center">
-              <h1 className="font-serif text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl text-balance">
-                Private Hibachi Catering at Your Home or Venue
-              </h1>
-              <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                Transform your next celebration into an unforgettable culinary experience. Professional chefs, sizzling
-                entertainment, and delicious food—all at your doorstep.
-              </p>
+              {/* Blur overlay behind text content only */}
+              <div className="relative">
+                <div className="absolute inset-0 -mx-8 -my-4 bg-background/40 backdrop-blur-sm rounded-lg -z-10" />
+                <div className="relative">
+                  <h1 className="font-serif text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl text-balance">
+                    Private Hibachi Catering at Your Home or Venue
+                  </h1>
+                  <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                    Transform your next celebration into an unforgettable culinary experience. Professional chefs, sizzling
+                    entertainment, and delicious food—all at your doorstep.
+                  </p>
+                </div>
+              </div>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button asChild size="lg">
                   <Link href="/service-area">

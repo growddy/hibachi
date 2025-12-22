@@ -16,6 +16,7 @@ export default function ContactPage() {
         <section className="bg-secondary/30 py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
+              <Phone className="h-12 w-12 text-primary mx-auto mb-4" />
               <h1 className="font-serif text-4xl font-bold md:text-5xl text-balance">Contact Us</h1>
               <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
                 Have questions about our services? We'd love to hear from you. Reach out and we'll respond within 24
