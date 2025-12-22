@@ -1,65 +1,52 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { Minus, Plus, Users, Calculator } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Users, Calculator, Check } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Slider } from "@/components/ui/slider"
 
 const PRICING = {
-  basePerPerson: 55,
-  premiumPerPerson: 75,
-  kidDiscount: 15, // Kids cost this much less per person
+  adultPrice: 50,
+  childPrice: 25, // Under 13
   minimumGuests: 10,
-  travelFeePerMile: 1.5,
-  includedMiles: 30,
+  filetUpgrade: 5,
+  lobsterUpgrade: 10,
 }
 
-const packageOptions = [
-  {
-    id: "standard",
-    name: "Standard Package",
-    description: "Chicken, steak, shrimp with fried rice & vegetables",
-    pricePerPerson: PRICING.basePerPerson,
-  },
-  {
-    id: "premium",
-    name: "Premium Package",
-    description: "Filet mignon, lobster, salmon with premium sides",
-    pricePerPerson: PRICING.premiumPerPerson,
-  },
+const includedItems = [
+  "Salad",
+  "Vegetable",
+  "Two proteins (choose from steak, shrimp, chicken, salmon, scallop, tofu)",
+]
+
+const additionalItems = [
+  { name: "Gyoza (pork, 6pcs)", price: 10 },
+  { name: "Edamame", price: 5 },
+  { name: "Noodles", price: 4 },
 ]
 
 export function CostCalculator() {
   const [adults, setAdults] = useState(10)
-  const [kids, setKids] = useState(0)
-  const [selectedPackage, setSelectedPackage] = useState("standard")
-  const [distance, setDistance] = useState(15)
+  const [children, setChildren] = useState(0)
+  const [filetUpgrades, setFiletUpgrades] = useState(0)
+  const [lobsterUpgrades, setLobsterUpgrades] = useState(0)
 
-  const totalGuests = adults + kids
+  const totalGuests = adults + children
 
   const estimate = useMemo(() => {
-    const pkg = packageOptions.find((p) => p.id === selectedPackage)
-    if (!pkg) return { subtotal: 0, travelFee: 0, total: 0 }
+    const adultCost = adults * PRICING.adultPrice
+    const childCost = children * PRICING.childPrice
+    const baseSubtotal = adultCost + childCost
 
-    const adultCost = adults * pkg.pricePerPerson
-    const kidCost = kids * (pkg.pricePerPerson - PRICING.kidDiscount)
-    const subtotal = adultCost + kidCost
+    const filetCost = filetUpgrades * PRICING.filetUpgrade
+    const lobsterCost = lobsterUpgrades * PRICING.lobsterUpgrade
+    const upgradeTotal = filetCost + lobsterCost
 
-    const extraMiles = Math.max(0, distance - PRICING.includedMiles)
-    const travelFee = extraMiles * PRICING.travelFeePerMile
+    const total = baseSubtotal + upgradeTotal
 
-    const total = subtotal + travelFee
-
-    return { subtotal, travelFee, total }
-  }, [adults, kids, selectedPackage, distance])
-
-  const incrementAdults = () => setAdults((prev) => Math.min(prev + 1, 100))
-  const decrementAdults = () => setAdults((prev) => Math.max(prev - 1, PRICING.minimumGuests - kids))
-  const incrementKids = () => setKids((prev) => Math.min(prev + 1, 50))
-  const decrementKids = () => setKids((prev) => Math.max(prev - 1, 0))
+    return { baseSubtotal, filetCost, lobsterCost, upgradeTotal, total }
+  }, [adults, children, filetUpgrades, lobsterUpgrades])
 
   return (
     <Card className="max-w-2xl mx-auto">
@@ -70,124 +57,159 @@ export function CostCalculator() {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-8">
-        {/* Package Selection */}
-        <div className="space-y-3">
-          <Label className="text-base font-semibold">Select Package</Label>
-          <RadioGroup value={selectedPackage} onValueChange={setSelectedPackage} className="grid gap-3">
-            {packageOptions.map((pkg) => (
-              <label
-                key={pkg.id}
-                className={`flex items-start gap-4 p-4 rounded-lg border cursor-pointer transition-colors ${
-                  selectedPackage === pkg.id ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"
-                }`}
-              >
-                <RadioGroupItem value={pkg.id} id={pkg.id} className="mt-1" />
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium">{pkg.name}</span>
-                    <span className="font-semibold text-primary">${pkg.pricePerPerson}/person</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-1">{pkg.description}</p>
-                </div>
-              </label>
-            ))}
-          </RadioGroup>
+        {/* Guest Count - Adults */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <Label className="text-base font-semibold flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              Number of Adults
+            </Label>
+            <span className="font-semibold text-lg">{adults}</span>
+          </div>
+          <Slider
+            value={[adults]}
+            onValueChange={(value) => setAdults(value[0])}
+            min={Math.max(0, PRICING.minimumGuests - children)}
+            max={100}
+            step={1}
+            className="w-full"
+            aria-label="Number of adults"
+          />
+          <p className="text-sm text-muted-foreground">${PRICING.adultPrice} per adult</p>
         </div>
 
-        {/* Guest Count */}
+        {/* Guest Count - Children */}
         <div className="space-y-4">
-          <Label className="text-base font-semibold flex items-center gap-2">
-            <Users className="h-4 w-4" />
-            Number of Guests
-          </Label>
-
-          {/* Adults */}
           <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Adults</p>
-              <p className="text-sm text-muted-foreground">12 years and older</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={decrementAdults}
-                disabled={totalGuests <= PRICING.minimumGuests}
-                aria-label="Decrease adults"
-              >
-                <Minus className="h-4 w-4" />
-              </Button>
-              <span className="w-12 text-center font-semibold text-lg">{adults}</span>
-              <Button variant="outline" size="icon" onClick={incrementAdults} aria-label="Increase adults">
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
+            <Label className="text-base font-semibold">Number of Children (Under 13)</Label>
+            <span className="font-semibold text-lg">{children}</span>
           </div>
+          <Slider
+            value={[children]}
+            onValueChange={(value) => setChildren(value[0])}
+            min={Math.max(0, PRICING.minimumGuests - adults)}
+            max={50}
+            step={1}
+            className="w-full"
+            aria-label="Number of children"
+          />
+          <p className="text-sm text-muted-foreground">${PRICING.childPrice} per child</p>
+        </div>
 
-          {/* Kids */}
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Kids</p>
-              <p className="text-sm text-muted-foreground">Under 12 (${PRICING.kidDiscount} discount each)</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={decrementKids}
-                disabled={kids === 0}
-                aria-label="Decrease kids"
-              >
-                <Minus className="h-4 w-4" />
-              </Button>
-              <span className="w-12 text-center font-semibold text-lg">{kids}</span>
-              <Button variant="outline" size="icon" onClick={incrementKids} aria-label="Increase kids">
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-
-          <p className="text-sm text-muted-foreground">
+        {/* Minimum requirement note */}
+        <div className="bg-secondary/50 p-3 rounded-lg">
+          <p className="text-sm font-medium">
             Minimum {PRICING.minimumGuests} guests required. Total guests: {totalGuests}
           </p>
         </div>
 
-        {/* Distance */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Label className="text-base font-semibold">Distance from Our Location</Label>
-            <span className="font-medium">{distance} miles</span>
+        {/* Included Items */}
+        <div className="space-y-3">
+          <Label className="text-base font-semibold">What's Included</Label>
+          <div className="space-y-2">
+            {includedItems.map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <div className="shrink-0 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Check className="h-3 w-3 text-primary" />
+                </div>
+                <span className="text-sm">{item}</span>
+              </div>
+            ))}
           </div>
-          <Slider
-            value={[distance]}
-            onValueChange={(value) => setDistance(value[0])}
-            min={0}
-            max={100}
-            step={5}
-            className="w-full"
-            aria-label="Distance in miles"
-          />
-          <p className="text-sm text-muted-foreground">
-            First {PRICING.includedMiles} miles included. ${PRICING.travelFeePerMile}/mile after.
-          </p>
+        </div>
+
+        {/* Protein Upgrades */}
+        <div className="space-y-6 border-t pt-6">
+          <Label className="text-base font-semibold">Protein Upgrades (Optional)</Label>
+
+          {/* Filet Mignon Upgrades */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <Label className="font-medium">Filet Mignon Upgrades</Label>
+                <p className="text-sm text-muted-foreground">${PRICING.filetUpgrade} per upgrade</p>
+              </div>
+              <span className="font-semibold text-lg">{filetUpgrades}</span>
+            </div>
+            <Slider
+              value={[filetUpgrades]}
+              onValueChange={(value) => setFiletUpgrades(value[0])}
+              min={0}
+              max={totalGuests}
+              step={1}
+              className="w-full"
+              aria-label="Number of Filet Mignon upgrades"
+            />
+          </div>
+
+          {/* Lobster Upgrades */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <Label className="font-medium">Lobster Upgrades</Label>
+                <p className="text-sm text-muted-foreground">${PRICING.lobsterUpgrade} per upgrade</p>
+              </div>
+              <span className="font-semibold text-lg">{lobsterUpgrades}</span>
+            </div>
+            <Slider
+              value={[lobsterUpgrades]}
+              onValueChange={(value) => setLobsterUpgrades(value[0])}
+              min={0}
+              max={totalGuests}
+              step={1}
+              className="w-full"
+              aria-label="Number of Lobster upgrades"
+            />
+          </div>
+        </div>
+
+        {/* Additional Items Note */}
+        <div className="space-y-2 border-t pt-6">
+          <Label className="text-base font-semibold">Additional Items Available</Label>
+          <div className="bg-secondary/50 p-4 rounded-lg space-y-2">
+            {additionalItems.map((item) => (
+              <div key={item.name} className="flex items-center justify-between text-sm">
+                <span>{item.name}</span>
+                <span className="font-medium">${item.price}</span>
+              </div>
+            ))}
+            <p className="text-xs text-muted-foreground mt-2">
+              These items can be added to your order when booking.
+            </p>
+          </div>
         </div>
 
         {/* Cost Breakdown */}
         <div className="border-t pt-6 space-y-3">
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Food & Service ({totalGuests} guests)</span>
-            <span>${estimate.subtotal.toLocaleString()}</span>
+            <span className="text-muted-foreground">
+              Base Cost ({adults} adults × ${PRICING.adultPrice} + {children} children × ${PRICING.childPrice})
+            </span>
+            <span>${estimate.baseSubtotal.toLocaleString()}</span>
           </div>
-          {estimate.travelFee > 0 && (
+          {estimate.filetCost > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Travel Fee ({distance - PRICING.includedMiles} extra miles)</span>
-              <span>${estimate.travelFee.toLocaleString()}</span>
+              <span className="text-muted-foreground">
+                Filet Mignon Upgrades ({filetUpgrades} × ${PRICING.filetUpgrade})
+              </span>
+              <span>${estimate.filetCost.toLocaleString()}</span>
+            </div>
+          )}
+          {estimate.lobsterCost > 0 && (
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">
+                Lobster Upgrades ({lobsterUpgrades} × ${PRICING.lobsterUpgrade})
+              </span>
+              <span>${estimate.lobsterCost.toLocaleString()}</span>
             </div>
           )}
           <div className="flex justify-between text-lg font-bold pt-3 border-t">
-            <span>Estimated Total</span>
+            <span>Estimated Subtotal</span>
             <span className="text-primary">${estimate.total.toLocaleString()}</span>
           </div>
+          <p className="text-sm text-muted-foreground pt-2">
+            *Gratuity not included. Suggested gratuity is 20% of total bill.
+          </p>
         </div>
 
         <p className="text-xs text-muted-foreground text-center">

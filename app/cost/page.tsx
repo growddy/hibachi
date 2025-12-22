@@ -9,11 +9,16 @@ const includedItems = [
   "Professional hibachi chef",
   "All food and ingredients",
   "Cooking equipment and grill",
-  "Serving utensils and plates",
-  "Setup and cleanup",
-  "1.5-2 hour cooking experience",
-  "Interactive entertainment",
+  "1.5 hour cooking experience",
+  "Interactive entertainment", 
   "Dietary accommodations",
+]
+
+const whatYouBring = [
+  "Serving utensils and plates",
+  "Tables and chairs",
+  "Decorations",
+  "Most importantly, energy and fun!"
 ]
 
 const faqs = [
@@ -24,12 +29,12 @@ const faqs = [
   },
   {
     question: "Are gratuities included?",
-    answer: "Gratuity is not included in our pricing. Tips for the chef are appreciated but not required.",
+    answer: "Gratuity is not included in our pricing. Tips for the chef are greatly appreciated for exceptional service.",
   },
   {
     question: "Do you provide tables and chairs?",
     answer:
-      "We bring the cooking equipment, but seating and tables should be provided at the venue. We can recommend rental services if needed.",
+      "We bring the cooking equipment, but seating and tables should be provided at the venue.",
   },
   {
     question: "What about dietary restrictions?",
@@ -71,6 +76,25 @@ export default function CostPage() {
                   <div key={item} className="flex items-center gap-3">
                     <div className="shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
                       <Check className="h-4 w-4 text-primary" />
+                    </div>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* What You Bring */}
+        <section className="py-16 bg-secondary/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto">
+              <h2 className="font-serif text-2xl font-bold text-center mb-8">What You Bring</h2>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {whatYouBring.map((item) => (
+                  <div key={item} className="flex items-center gap-3">
+                    <div className="shrink-0 w-6 h-6 rounded-full bg-muted flex items-center justify-center">
+                      <Check className="h-4 w-4 text-muted-foreground" />
                     </div>
                     <span>{item}</span>
                   </div>
