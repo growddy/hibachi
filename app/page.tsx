@@ -66,13 +66,13 @@ export default function HomePage() {
               <div className="relative">
                 <div className="absolute inset-0 -mx-8 -my-4 bg-background/40 backdrop-blur-sm rounded-lg -z-10" />
                 <div className="relative">
-                  <h1 className="font-serif text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl text-balance">
-                    Private Hibachi Catering at Your Home or Venue
-                  </h1>
-                  <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                    Transform your next celebration into an unforgettable culinary experience. Professional chefs, sizzling
-                    entertainment, and delicious food—all at your doorstep.
-                  </p>
+              <h1 className="font-serif text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl text-balance">
+                Private Hibachi Catering at Your Home or Venue
+              </h1>
+              <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                Transform your next celebration into an unforgettable culinary experience. Professional chefs, sizzling
+                entertainment, and delicious food—all at your doorstep.
+              </p>
                 </div>
               </div>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
