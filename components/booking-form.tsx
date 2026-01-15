@@ -84,6 +84,8 @@ export function BookingForm() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setIsSubmitting(true)
+
+    
     await new Promise((resolve) => setTimeout(resolve, 2000))
     setIsSubmitting(false)
     setIsSubmitted(true)
