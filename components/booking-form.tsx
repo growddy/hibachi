@@ -85,11 +85,60 @@ export function BookingForm() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    setIsSubmitting(false)
+    /* add button functionality here */
+    try {
+      const payload = {
+        eventDate: formData.eventDate,
+        eventTime: formData.eventTime,
+        eventType: formData.eventType,
+        guestCount: formData.guestCount,
+
+        // IMPORTANT: API expects packageType, but your state is `package`
+        packageType: formData.package,
+        dietaryNotes: formData.dietaryNotes || undefined,
+
+        venueType: formData.venueType,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        zip: formData.zip,
+        venueNotes: formData.venueNotes || undefined,
+
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+
+        howHeard: formData.howHeard || undefined,
+        additionalNotes: formData.additionalNotes || undefined,
+    }
+  
+
+    const res = await fetch("/api/booking", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+
+    const data = await res.json().catch(() => ({}))
+
+    if (!res.ok) {
+      // show useful error
+      const msg =
+        data?.error ||
+        (res.status === 400 ? "Missing required fields." : "Something went wrong.")
+      throw new Error(msg)
+    }
+
+
     setIsSubmitted(true)
+  } catch (err: any) {
+    // You can replace alert with a nicer UI/toast later
+    alert(err?.message ?? "Failed to submit booking request.")
+  } finally {
+    setIsSubmitting(false)
   }
+}
 
   if (isSubmitted) {
     return (
