@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     }
 
     const internalEmail = resend.emails.send({
-      from: 'DH <inquiry@dynamitehibachi.com>',
+      from: 'Dynamite Hibachi <inquiry@dynamitehibachi.com>',
       to: ['dynamitehibachi@gmail.com'],
       replyTo: email,
       subject: `Incoming Inquiry from ${firstName} ${lastName}`,

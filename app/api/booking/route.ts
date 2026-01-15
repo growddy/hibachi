@@ -39,7 +39,7 @@ export async function POST(request: Request) {
 
     /* Send email to internal team */
     const internalEmail = resend.emails.send({
-      from: 'DH <inquiry@dynamitehibachi.com>',
+      from: 'Dynamite Hibachi <inquiry@dynamitehibachi.com>',
       to: ['dynamitehibachi@gmail.com'],
       replyTo: email,
       subject: `Incoming Booking Request from ${firstName} ${lastName}`,
