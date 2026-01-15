@@ -82,7 +82,7 @@ export const PRICING_CONFIG = {
 // Contact information
 export const CONTACT_INFO = {
   phone: "(555) 123-4567",
-  email: "info@dynamitehibachi.com",
+  email: "dynamitehibachi@gmail.com",
   social: {
     instagram: "https://instagram.com/dynamitehibachi",
     tiktok: "https://tiktok.com/@dynamitehibachi",
