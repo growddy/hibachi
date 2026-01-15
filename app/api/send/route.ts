@@ -1,5 +1,6 @@
 import React from 'react';
 import { EmailTemplate } from '@/components/email-template';
+import { UserConfirmationEmail } from '@/components/user-confirmation';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
       return Response.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const { data, error } = await resend.emails.send({
+    const internalEmail = resend.emails.send({
       from: 'DH <inquiry@dynamitehibachi.com>',
       to: ['dynamitehibachi@gmail.com'],
       replyTo: email,
@@ -37,12 +38,25 @@ export async function POST(request: Request) {
       }),
     });
 
-    if (error) {
-      console.error('Resend error:', error);
-      return Response.json({ error: error.message || 'Failed to send email' }, { status: 500 });
-    }
+    const customerEmail = resend.emails.send({
+      from: 'Dynamite Hibachi <inquiry@dynamitehibachi.com>',
+      to: [email],
+      subject: 'We received your inquiry!',
+      react: React.createElement(UserConfirmationEmail, {
+        firstName,
+      }),
+    });
 
-    return Response.json(data);
+    const [internalResult, customerResult] = await Promise.all([
+      internalEmail,
+      customerEmail,
+    ]);
+
+    return Response.json({
+      success: true,
+      internalId: internalResult.data?.id,
+      customerId: customerResult.data?.id,
+    });
   } catch (error) {
     console.error('API error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Internal server error';
