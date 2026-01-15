@@ -82,6 +82,7 @@ export function BookingForm() {
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1) as Step)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    // saves state 
     e.preventDefault()
     setIsSubmitting(true)
 
@@ -93,7 +94,6 @@ export function BookingForm() {
         eventType: formData.eventType,
         guestCount: formData.guestCount,
 
-        // IMPORTANT: API expects packageType, but your state is `package`
         packageType: formData.package,
         dietaryNotes: formData.dietaryNotes || undefined,
 

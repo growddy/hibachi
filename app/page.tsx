@@ -14,14 +14,14 @@ const features = [
     description: "Experienced hibachi chefs trained in authentic teppanyaki cooking techniques.",
   },
   {
-    icon: Utensils,
-    title: "Full Setup Included",
-    description: "We bring everything needed—grill, utensils, ingredients, and cleanup.",
-  },
-  {
     icon: Sparkles,
     title: "Live Entertainment",
     description: "Fire tricks, knife skills, and interactive cooking that wows every guest.",
+  },
+  {
+    icon: Utensils,
+    title: "Quality Ingredients",
+    description: "Only the freshest ingredients sourced locally.",
   },
   {
     icon: Users,

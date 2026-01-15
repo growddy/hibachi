@@ -9,11 +9,16 @@ const includedItems = [
   "Professional hibachi chef",
   "All food and ingredients",
   "Cooking equipment and grill",
-  "Serving utensils and plates",
-  "Setup and cleanup",
-  "1.5-2 hour cooking experience",
+  "1-1.5 hours cooking experience",
   "Interactive entertainment",
   "Dietary accommodations",
+]
+
+const whatYouBring = [
+  "Safe Cooking Environment",
+  "Salad Plate and Dinner Plate",
+  "Table Setup",
+  "Optional Decoration",
 ]
 
 const faqs = [
@@ -55,7 +60,7 @@ export default function CostPage() {
               <DollarSign className="h-12 w-12 text-primary mx-auto mb-4" />
               <h1 className="font-serif text-4xl font-bold md:text-5xl text-balance">Pricing & Packages</h1>
               <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-                Transparent pricing with no hidden fees. Use our calculator to get an instant estimate for your event.
+                Use our calculator to get an instant estimate for your event. Minimum of $500 is required.
               </p>
             </div>
           </div>
@@ -68,6 +73,25 @@ export default function CostPage() {
               <h2 className="font-serif text-2xl font-bold text-center mb-8">What's Included</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {includedItems.map((item) => (
+                  <div key={item} className="flex items-center gap-3">
+                    <div className="shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Check className="h-4 w-4 text-primary" />
+                    </div>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* What you bring */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto">
+              <h2 className="font-serif text-2xl font-bold text-center mb-8">What You Bring</h2>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {whatYouBring.map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <div className="shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
                       <Check className="h-4 w-4 text-primary" />

@@ -16,14 +16,15 @@ const PRICING = {
 
 const includedItems = [
   "Salad",
-  "Vegetable",
+  "Vegetable (Mixed broccoli zucchini, carrot, onion",
   "Two proteins (choose from steak, shrimp, chicken, salmon, scallop, tofu)",
+  "Sake",
 ]
 
 const additionalItems = [
   { name: "Gyoza (pork, 6pcs)", price: 10 },
   { name: "Edamame", price: 5 },
-  { name: "Noodles", price: 4 },
+  { name: "Garlic Noodles", price: 4 },
 ]
 
 export function CostCalculator() {
@@ -210,11 +211,14 @@ export function CostCalculator() {
           <p className="text-sm text-muted-foreground pt-2">
             *Gratuity not included. Suggested gratuity is 20% of total bill.
           </p>
+          <p className="text-sm text-muted-foreground pt-2">
+            **Travel fee is free 30 miles from closest location to you, then $2 per mile after.
+          </p>
         </div>
 
-        <p className="text-xs text-muted-foreground text-center">
-          This is an estimate only. Final pricing may vary based on specific menu selections, venue requirements, and
-          other factors. Contact us for a detailed quote.
+        <p className="text-xs text-center">
+          This is an estimate only. Final pricing may vary based on specific menu selections, credit card fees, and
+          sales tax. Contact us for a detailed quote.
         </p>
       </CardContent>
     </Card>
