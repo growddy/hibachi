@@ -1,5 +1,5 @@
 import React from 'react';
-import { EmailTemplate } from '@/components/email-template';
+import { EmailTemplate } from '@/components/contact-template';
 import { UserConfirmationEmail } from '@/components/user-confirmation';
 import { Resend } from 'resend';
 
