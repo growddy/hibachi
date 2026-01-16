@@ -60,7 +60,7 @@ export function Navbar() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px]">
+          <SheetContent side="right" className="w-[300px] px-6 pt-6 pb-8">
             <SheetTitle className="flex items-center gap-2 mb-8">
               <Flame className="h-6 w-6 text-primary" />
               <span className="font-serif font-bold">Dynamite Hibachi</span>
