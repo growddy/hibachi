@@ -14,7 +14,7 @@ import {
     firstName?: string;
   }
   
-  const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://dynamitehibachi.com";
+  const baseUrl = "https://dynamitehibachi.com";
   
   export const UserConfirmationEmail = ({ firstName }: UserConfirmationEmailProps) => (
     <Html>
