@@ -16,7 +16,7 @@ const PRICING = {
 
 const includedItems = [
   "Salad",
-  "Vegetable (Mixed broccoli zucchini, carrot, onion",
+  "Vegetable (Mixed broccoli zucchini, carrot, onion)",
   "Two proteins (choose from steak, shrimp, chicken, salmon, scallop, tofu)",
   "Sake",
 ]
@@ -71,7 +71,7 @@ export function CostCalculator() {
             value={[adults]}
             onValueChange={(value) => setAdults(value[0])}
             min={Math.max(0, PRICING.minimumGuests - children)}
-            max={100}
+            max={50}
             step={1}
             className="w-full"
             aria-label="Number of adults"
@@ -89,7 +89,7 @@ export function CostCalculator() {
             value={[children]}
             onValueChange={(value) => setChildren(value[0])}
             min={Math.max(0, PRICING.minimumGuests - adults)}
-            max={50}
+            max={25}
             step={1}
             className="w-full"
             aria-label="Number of children"
